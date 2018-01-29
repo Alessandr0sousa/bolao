@@ -14,14 +14,6 @@ $(document).ready(function(){
 		$('form#form2').attr({action:"php/set_dez.php"});
 		$('button#save2').prop("disabled", true);
 	});
-	$('button#new_3').click(function(){
-		$('#mConc').modal({backdrop: "static"});
-		$('h2#title').text(" Cadastro").attr({class:"glyphicon glyphicon-ok"});
-		$('form#form2').attr({action:"php/get_con_sort.php"});
-		$('#cod').attr('disabled', 'true');
-		$('input#cod').val("c"+Math.floor((Math.random() * 1000) + 1));
-
-	});
 	$('button#up').click(function(){
 		$('h2#title').text(" Alterar").attr({class:"glyphicon glyphicon-edit"});
 		$('form#form').attr({action:"php/up.php"});
@@ -32,12 +24,6 @@ $(document).ready(function(){
 		$('#nome').attr('disabled', 'true');
 		$('#concurso').attr('disabled', 'true');
 		$('button#save2').prop("disabled", true);
-	});
-	$('button#up_3').click(function(){
-		$('h2#title').text(" Alterar").attr({class:"glyphicon glyphicon-edit"});
-		$('form#form3').attr({action:""});
-		$('#cod').attr('disabled', 'true');
-		// $('button#save3').prop("disabled", true);
 	});
 	/*contador de checkbox*/
 	$('input[type=checkbox]').on('change', function () {
@@ -91,16 +77,6 @@ $(document).ready(function(){
 		modal.find('#concurso').val(recipientconcurso)
 		modal.find('#id_dez').val(recipientid)	
 	})
-	$('#mConc').on('show.bs.modal', function (event) {
-		var button = $(event.relatedTarget) 
-		var recipient = button.data('whatever')
-		var recipientatv= button.data('whateveratv')
-		var recipientid = button.data('whateverid')
-		var modal = $(this)
-		modal.find('#cod').val(recipient)
-		modal.find('#atv').val(recipientatv)
-		modal.find('#id').val(recipientid)
-	})
 	/*Paginação e consulta*/
 	$('#cli').DataTable({
 		"ordering": false,
@@ -122,19 +98,8 @@ $(document).ready(function(){
 			"infoFiltered": "(Filtrando de _MAX_.)"
 		}
 	})
-	// $('#lcli').DataTable({
-	// 	"ordering": false,
-	// 	"language": {
-	// 		"lengthMenu": "_MENU_",
-	// 		"zeroRecords": "Nem um registro encontrado.",
-	// 		"info": "Página _PAGE_ de _PAGES_",
-	// 		"infoEmpty": "Nenhum registro.",
-	// 		"infoFiltered": "(Filtrando de _MAX_.)"
-	// 	}
-	// })
-
-	// $('#save2').prop("disabled", false);
-	// btnInativo()
+	
+	
 });
 
 function canc() {

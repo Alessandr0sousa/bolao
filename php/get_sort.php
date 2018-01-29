@@ -1,13 +1,18 @@
 <?php
 include 'connect.php';
 
-$url = file_get_contents('https://confiraloterias.com.br/api/json/?loteria=megasena&token=9ukIWdpaWa7B980');
+$url = file_get_contents('https://confiraloterias.com.br/api/json/?loteria=megasena&token=koHcIekFISRBMfd');
 $res = json_decode($url);
-$concurso = $res->concurso;
-// print_r($concurso);
+// var_dump($res);
 
-foreach ($concurso as $c) {
-	echo "numero: $c->numero";
+$conc = $res->concurso->numero;
+echo $conc."&nbsp";
+for ($i=0; $i < 6 ; $i++) { 
+	$d = $res->concurso->dezenas[$i];	
+print $d."&nbsp;";
 }
+
+var_dump($d);
+
 
 ?>

@@ -3,6 +3,7 @@
 <head>
 	<meta http-equiv="content-language" content="pt-br">
 	<title>Bolão dos Amigos</title>
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,11 +14,11 @@
 </head>
 <body class="cli">
 	<section class="container">
-		<div class="container-fluid">
+		<div class="container-fluid log">
 			<div class="col-sm-4 col-sm-offset-4">
 				<div class="form img-rounded">
 					<div class="img">
-						<img src="img/user.png" width="60%" class="im img-circle">
+						<img src="img/logo-LK-3.png" width="60%" class="im img-circle">
 					</div>
 					<form id="login" action="php/login.php" method="POST">
 

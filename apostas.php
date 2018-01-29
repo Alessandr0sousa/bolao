@@ -20,6 +20,7 @@ $user = ucfirst($_SESSION['user']);
 	<meta http-equiv="content-language" content="pt-br"/>
 	<title>Bolão dos Amigos</title>
 	<meta charset="utf-8">
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
@@ -37,9 +38,7 @@ $user = ucfirst($_SESSION['user']);
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body class="cli">
-
 	<!-- header navbar -->
-	
 	<header>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="container-fluid">
@@ -158,7 +157,7 @@ $user = ucfirst($_SESSION['user']);
 						<div class="modal-body" style="padding:10px 15px;">
 							
 							<!-- Fomulario -->
-							<form action="" id="form" role="form" method="post">
+							<form action="" id="form2" role="form2" method="post">
 								<input type="hidden" name="id_dez" id="id_dez">
 								<div class="form-group">
 									<label for="nome"><span class="glyphicon glyphicon-user"></span> Cliente</label>
@@ -192,7 +191,7 @@ $user = ucfirst($_SESSION['user']);
 											$nm_input = "imp_".$i;
 											$nm_radio = "radio_".$i;
 											echo"<td>";
-											echo '<label><input type="checkbox" value="'.$i.'" name="d[]" id="d[]">&nbsp;'.$i.'</label>';
+											echo '<label><input type="checkbox" value="'.$i.'" name="d[]" id="d[]">'.$i.'&nbsp;</label>';
 											echo"</td>";
 											$i++;
 										}
@@ -203,7 +202,7 @@ $user = ucfirst($_SESSION['user']);
 									?>
 									<span id="qtd" class="qtd"></span>
 								</div>
-								<button type="submit" class="btn btn-success btn-block bts" id="save2"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+								<button class="btn btn-success btn-block bts" id="save2"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
 							</form>
 
 						</div>

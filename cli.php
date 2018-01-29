@@ -20,6 +20,7 @@ $user = ucfirst($_SESSION['user']);
 	<meta http-equiv="content-language" content="pt-br"/>
 	<title>Bolão dos Amigos</title>
 	<meta charset="utf-8">
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

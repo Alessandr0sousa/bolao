@@ -20,6 +20,7 @@ $user = ucfirst($_SESSION['user']);
 	<meta http-equiv="content-language" content="pt-br"/>
 	<title>Bolão dos Amigos</title>
 	<meta charset="utf-8">
+	<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js"></script>
@@ -120,15 +121,73 @@ $user = ucfirst($_SESSION['user']);
 					</div>
 					<div class="panel-footer">
 						<?php 
-						while ($res = $get3->fetch(PDO::FETCH_ASSOC)) {
-							echo "<span class='dez'>".$res['d1']."</span>&nbsp;";
-							echo "<span class='dez'>".$res['d2']."</span>&nbsp;";
-							echo "<span class='dez'>".$res['d3']."</span>&nbsp;";
-							echo "<span class='dez'>".$res['d4']."</span>&nbsp;";
-							echo "<span class='dez'>".$res['d5']."</span>&nbsp;";
-							echo "<span class='dez'>".$res['d6']."</span>";
-						}
+						$res = $get3->fetch(PDO::FETCH_ASSOC);
+						echo "<span class='dez'>".$res['d1']."</span>&nbsp;";
+						echo "<span class='dez'>".$res['d2']."</span>&nbsp;";
+						echo "<span class='dez'>".$res['d3']."</span>&nbsp;";
+						echo "<span class='dez'>".$res['d4']."</span>&nbsp;";
+						echo "<span class='dez'>".$res['d5']."</span>&nbsp;";
+						echo "<span class='dez'>".$res['d6']."</span>";
 						?>
+						<button class="btn btn-xs btn-info pull-right" id="new_4" data-toggle="modal"><span class="glyphicon glyphicon-new-window"></span></button>
+						<div class="modal fade" id="s_dez" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+							<div class="modal-dialog modal-sm" role="document">
+								<!-- Modal conteudo-->
+								<div class="modal-content">
+									<div class="modal-header" style="padding:10px 15px;">
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+										<h2 class="modal-title" id="title"><span id="ico" class=""></span></h2>
+									</div>
+									<div class="modal-body" style="padding:10px 15px;">
+
+										<!-- Fomulario -->
+										<form action="" id="form3" role="form3" method="post">
+											<div class="form-group">
+												<label for="concurso"><span class="glyphicon glyphicon-list-alt"></span> Concursos</label>
+												<select name="cod" class="form-control" id="cod">
+													<?php include "php/read.php";
+													while ($linha2 = $get2->fetch(PDO::FETCH_ASSOC)) {
+														echo "<option value=".$concurso = $linha2['id'].">".$concurso = $linha2['cod']."</option>";
+														echo '<input type="hidden" name="id_" id="id_" value='.$concurso = $linha2['id'].'>';
+													}
+													?>
+												</select>
+											</div>
+											<div class="form-group">
+												<label>Sorteio</label>
+												<input type="text" name="sort" id="sort" class="form-control">
+											</div>
+											<div id="dezenas" align="center" class="form-group">
+												<?php
+												echo"<table>";
+												$i=1;
+												for ($z=1; $z<=10 ; $z++) { 
+													echo"<tr>";
+													for ($j=1; $j<=6 ; $j++) { 
+														$nm_input = "imp_".$i;
+														$nm_radio = "radio_".$i;
+														echo"<td>";
+														echo '<label><input type="checkbox" value="'.$i.'" name="d[]" id="d[]">'.$i.'&nbsp;</label>';
+														echo"</td>";
+														$i++;
+													}
+													$j++;
+													echo"</tr>";
+												}
+												echo"</table>";
+												?>
+												<span id="qtd" class="qtd"></span>
+											</div>
+											<button class="btn btn-success btn-block bts" id="save2"><span class="glyphicon glyphicon-floppy-disk"></span> Salvar</button>
+										</form>
+
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal" id="canc" onclick="canc()"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+									</div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -189,10 +248,11 @@ $user = ucfirst($_SESSION['user']);
 					</div>
 				</div>
 			</div>
-			<div id="listaCli" class="col-sm-5">
+			<div id="listaCli" class="col-sm-6">
+				<h3>Dezenas dos Clientes</h3>
 				<table id="lcli" class="table table-striped table-hover table-condensed display" cellspacing="0">
 					<thead>
-						<th>nome</th>
+						<th>Nome</th>
 						<th>D1</th>
 						<th>D2</th>
 						<th>D3</th>
@@ -203,52 +263,78 @@ $user = ucfirst($_SESSION['user']);
 						<th>D8</th>
 						<th>D9</th>
 						<th>D10</th>
+						<th>Acertos</th>
 					</thead>
 					<tbody>
 						<?php
 						include "php/apuracao.php";
+						$n = 0;
 						while ($res = $get2->fetch(PDO::FETCH_ASSOC)) {
-							echo "<tr>";
+							echo "<tr id='l".$n."'>";
 							echo "<td>".$res['nome']."</td>";
-							echo "<td>".$res['d1']."</td>";
-							echo "<td>".$res['d2']."</td>";
-							echo "<td>".$res['d3']."</td>";
-							echo "<td>".$res['d4']."</td>";
-							echo "<td>".$res['d5']."</td>";
-							echo "<td>".$res['d6']."</td>";
-							echo "<td>".$res['d7']."</td>";
-							echo "<td>".$res['d8']."</td>";
-							echo "<td>".$res['d9']."</td>";
-							echo "<td>".$res['d10']."</td>";
+							echo "<td class='dn' name='c' id='c".$n."0'>".$res['d1']."</td>";
+							echo "<td class='dn' name='c' id='c".$n."1'>".$res['d2']."</td>";
+							echo "<td class='dn' name='c' id='c".$n."2'>".$res['d3']."</td>";
+							echo "<td class='dn' name='c' id='c".$n."3'>".$res['d4']."</td>";
+							echo "<td class='dn' name='c' id='c".$n."4'>".$res['d5']."</td>";
+							echo "<td class='dn' name='c' id='c".$n."5'>".$res['d6']."</td>";
+							echo "<td class='dn' name='c' id='c".$n."6'>".$res['d7']."</td>";
+							echo "<td class='dn' name='c' id='c".$n."7'>".$res['d8']."</td>";
+							echo "<td class='dn' name='c' id='c".$n."8'>".$res['d9']."</td>";
+							echo "<td class='dn' name='c' id='c".$n."9'>".$res['d10']."</td>";
+							echo "<td class='dn' name='n_hits' id='n_hits".$n."'></td>";
 							echo "</tr>";
+							$n++;
 						}
 						?>
 					</tbody>
 				</table>
 			</div>
 			<div id="Sorteios" class="col-sm-3">
+				<h3>Dezenas dos Sorteios</h3>
 				<table id="sort" class="table table-striped table-hover table-condensed display" cellspacing="0">
 					<thead>
-						<th>Sorteios</th>
-						<th>D1</th>
-						<th>D2</th>
-						<th>D3</th>
-						<th>D4</th>
-						<th>D5</th>
-						<th>D6</th>
+						<th class='dn'>Sorteios</th>
+						<th class='dn'>D1</th>
+						<th class='dn'>D2</th>
+						<th class='dn'>D3</th>
+						<th class='dn'>D4</th>
+						<th class='dn'>D5</th>
+						<th class='dn'>D6</th>
 					</thead>
 					<tbody>
 						<?php
 						include "php/apuracao.php";
+						$m = 0;
 						while ($res = $get->fetch(PDO::FETCH_ASSOC)) {
 							echo "<tr>";
-							echo "<td>".$res['cod']."</td>";
-							echo "<td>".$res['d1']."</td>";
-							echo "<td>".$res['d2']."</td>";
-							echo "<td>".$res['d3']."</td>";
-							echo "<td>".$res['d4']."</td>";
-							echo "<td>".$res['d5']."</td>";
-							echo "<td>".$res['d6']."</td>";
+							echo "<td class='dn'>".$res['cod']."</td>";
+							echo "<td class='dn' name='s' id='s".$m."0'>".$res['d1']."</td>";
+							echo "<td class='dn' name='s' id='s".$m."1'>".$res['d2']."</td>";
+							echo "<td class='dn' name='s' id='s".$m."2'>".$res['d3']."</td>";
+							echo "<td class='dn' name='s' id='s".$m."3'>".$res['d4']."</td>";
+							echo "<td class='dn' name='s' id='s".$m."4'>".$res['d5']."</td>";
+							echo "<td class='dn' name='s' id='s".$m."5'>".$res['d6']."</td>";
+							echo "</tr>";
+							$m++;
+						}
+						?>
+					</tbody>
+				</table>
+			</div>
+			<div id="acertos" class="col-xs-6 col-sm-4 col-md-2">
+				<h3>Acertos</h3>
+				<table id="t_acert" class="table table-striped table-hover table-condensed display" cellspacing="0">
+					<thead>
+						<th  class='dn'>Dez.</th>
+						<th  class='dn'>Qtd</th>
+					</thead>
+					<tbody>
+						<?php 
+						for ($i=10; $i >= 0; $i--) { 
+							echo "<tr>";
+							echo "<td class='dn'>".$i."</td>";
+							echo "<td class='dn' id='a".$i."'></td>";
 							echo "</tr>";
 						}
 						?>
@@ -260,7 +346,7 @@ $user = ucfirst($_SESSION['user']);
 			<p class="t_ftr">Desenvolvido por: Alessandro Sousa</p>
 			<p class="t_ftr">&copy; Copyright 2017 - All Rights Reserved</p>
 		</footer>
-		<script src="js/set.js"></script>
+		<script src="js/set_sort.js"></script>
 		<link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
 		<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 
