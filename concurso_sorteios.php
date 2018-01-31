@@ -223,7 +223,7 @@ $user = ucfirst($_SESSION['user']);
 						<div class="modal-body" style="padding:10px 15px;">
 							
 							<!-- Fomulario -->
-							<form action="" id="form2" role="form" method="post">
+							<form action="" id="form4" role="form" method="post">
 								<input type="hidden" name="id" id="id">
 								<div class="form-group">
 									<label for="cod"><span class="glyphicon glyphicon-list-alt"></span> Concurso</label>
@@ -250,7 +250,11 @@ $user = ucfirst($_SESSION['user']);
 			</div>
 			<div id="listaCli" class="col-sm-6">
 				<h3>Dezenas dos Clientes</h3>
-				<table id="lcli" class="table table-striped table-hover table-condensed display" cellspacing="0">
+				<div class="col-sm-6 input-group">	
+					<input type="text" id="busca" class="form-control" alt="result" autocomplete="off"/>
+					<div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+				</div>
+				<table id="lcli" class="table table-striped table-hover table-condensed display result" cellspacing="0">
 					<thead>
 						<th>Nome</th>
 						<th>D1</th>
@@ -271,7 +275,7 @@ $user = ucfirst($_SESSION['user']);
 						$n = 0;
 						while ($res = $get2->fetch(PDO::FETCH_ASSOC)) {
 							echo "<tr id='l".$n."'>";
-							echo "<td>".$res['nome']."</td>";
+							echo "<td name='".$res['nome']."'>".$res['nome']."</td>";
 							echo "<td class='dn' name='c' id='c".$n."0'>".$res['d1']."</td>";
 							echo "<td class='dn' name='c' id='c".$n."1'>".$res['d2']."</td>";
 							echo "<td class='dn' name='c' id='c".$n."2'>".$res['d3']."</td>";

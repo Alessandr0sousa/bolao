@@ -3,7 +3,7 @@ $(document).ready(function(){
 	$('button#new_3').click(function(){
 		$('#mConc').modal({backdrop: "static"});
 		$('h2#title').text(" Cadastro").attr({class:"glyphicon glyphicon-ok"});
-		$('form#form2').attr({action:"php/set_sort.php"});
+		$('form#form4').attr({action:"php/set_sort.php"});
 		$('#cod').attr('disabled', 'true');
 		$('input#cod').val("c"+Math.floor((Math.random() * 1000) + 1));
 
@@ -18,7 +18,7 @@ $(document).ready(function(){
 	/*button up pra cod sorteio*/
 	$('button#up_3').click(function(){
 		$('h2#title').text(" Alterar").attr({class:"glyphicon glyphicon-edit"});
-		$('form#form3').attr({action:""});
+		$('form#form4').attr({action:"php/up_sort.php"});
 		$('#cod').attr('disabled', 'true');
 		// $('button#save3').prop("disabled", true);
 	});
@@ -49,6 +49,7 @@ $(document).ready(function(){
 	var c_ = ($("[name=c]").length)/10;
 	var s_ = ($("[name=s]").length)/6;
 	var y = 0;
+	var valores = [];
 	// console.log("c: "+c_+" e s: "+s_)
 	var count = 0
 	for (var i = 0; i < c_; i++) {	
@@ -64,7 +65,43 @@ $(document).ready(function(){
 			}
 		}
 		var x = $('#l'+i).find('.c').length;
-		$('#n_hits'+i).text(x).css("color", "#ff0003").css("font-weight", "bolder");
-	}
+		valores.push(x);
+		$('#n_hits'+i).text(x).css("color", "#3f51b5").css("font-weight", "bolder");
 		
-});
+		}
+
+		var repeat = {};
+		$.each(valores, function(key,value) {
+			if (!repeat.hasOwnProperty(value)) {
+				repeat[value] = 1;
+			} else {
+				repeat[value]++;
+			}
+		});
+
+		for(var i = 0; i <= 10; i++) {
+			if(typeof repeat[i] === 'undefined') {
+				$('#a'+i).text(0);
+			}else {
+				$('#a'+i).text(repeat[i]).css("color", "#3f51b5").css("font-weight", "bolder");
+			}
+		}
+		$(function(){
+			$("#busca").keyup(function(){
+        //pega o css da tabela 
+        var tabela = $(this).attr('alt');
+        if( $(this).val() != ""){
+        	$("."+tabela+" tbody>tr").hide();
+        	$("."+tabela+" td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+        } else{
+        	$("."+tabela+" tbody>tr").show();
+        }
+    }); 
+		});
+		$.extend($.expr[":"], {
+			"contains-ci": function(elem, i, match, array) {
+				return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+			}
+		});
+
+	});

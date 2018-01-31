@@ -4,10 +4,10 @@ include 'connect.php';
 
 try {
 
-	$get = $pdo->prepare("SELECT * FROM clientes WHERE ativo = 1;");
+	$get = $pdo->prepare("SELECT * FROM clientes WHERE ativo = 1 order by nome");
 	$get->execute();	
 
-	$get2 = $pdo->prepare("SELECT * FROM concurso WHERE ativo = 1;");
+	$get2 = $pdo->prepare("SELECT * FROM concurso WHERE ativo = 1");
 	$get2->execute();
 
 	$get3 = $pdo->prepare("SELECT * FROM sorteio order by cod desc limit 1");
