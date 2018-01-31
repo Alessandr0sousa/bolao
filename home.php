@@ -31,7 +31,7 @@
 				<a class="navbar-brand" href="#">Bolão dos Amigos</a>
 				<div class="collapse navbar-collapse" id="myNavbar">	
 					<ul class="nav navbar-nav navbar-right">
-						<a href="login.php">
+						<a href="index.html">
 							<button type="submit" class="btn btn-info navbar-btn"><span class="glyphicon glyphicon-log-out""></span> login</button>
 						</a>&nbsp;&nbsp;
 					</ul>

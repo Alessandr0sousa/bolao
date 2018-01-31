@@ -47,7 +47,7 @@ if(!empty($_POST)){
 
 	if ($validarID->rowCount() === 0) {
 		unset($_SESSION['session_id']);
-		header("Location: ../index.php");
+		header("Location: ../home.php");
 	}
 
 }
@@ -56,7 +56,7 @@ if(!empty($_POST)){
 }else{
 	unset ($_SESSION['user']);
 	unset ($_SESSION['senha']);
-	header("Location: ../index.php");
+	header("Location: ../home.php");
 }
 }
 
